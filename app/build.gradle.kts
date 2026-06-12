@@ -19,12 +19,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // 用 debug 签名，让 Release 包也能直接安装
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
