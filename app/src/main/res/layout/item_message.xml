@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- 左侧：消息内容 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 应用名 + 发送者 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#2196F3"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_sender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="13sp"
+                    android:textColor="#666666" />
+
+                <View
+                    android:id="@+id/recalled_badge"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginStart="6dp"
+                    android:background="#FF4444"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_recalled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="已撤回"
+                    android:textSize="11sp"
+                    android:textColor="#FF4444"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- 消息内容 -->
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:maxLines="3"
+                android:ellipsize="end" />
+
+        </LinearLayout>
+
+        <!-- 右侧：时间 -->
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="12sp"
+            android:textColor="#AAAAAA" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

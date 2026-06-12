@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#FF4081</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#AAAAAA</color>
+
+    <color name="recalled_bg">#1AFF4444</color>
+    <color name="recalled_text">#FF4444</color>
+
+    <color name="wechat_green">#07C160</color>
+    <color name="qq_blue">#12B7F5</color>
+    <color name="dingtalk_blue">#3296FA</color>
+</resources>

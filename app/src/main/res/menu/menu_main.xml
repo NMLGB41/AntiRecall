@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_refresh"
+        android:title="刷新"
+        android:icon="@android:drawable/ic_menu_rotate"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_open_accessibility"
+        android:title="无障碍设置"
+        app:showAsAction="never" />
+
+</menu>

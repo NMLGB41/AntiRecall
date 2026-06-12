@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- 服务状态 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="#F5F5F5">
+
+            <TextView
+                android:id="@+id/tv_service_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🔴 防撤回服务未开启"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_recall_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已拦截 0 条撤回"
+                android:textSize="13sp"
+                android:textColor="#888888" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_enable_service"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:text="开启服务"
+                android:textSize="12sp"
+                app:cornerRadius="18dp" />
+
+        </LinearLayout>
+
+        <!-- 过滤芯片 -->
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            app:singleSelection="true"
+            app:chipSpacingHorizontal="8dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💬 微信"
+                style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🐧 QQ"
+                style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_dingtalk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📌 钉钉"
+                style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_recalled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚡ 已撤回"
+                style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- 消息列表 -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="8dp" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!-- 空状态 -->
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛡️"
+                android:textSize="64sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="还没有捕获到消息"
+                android:textSize="16sp"
+                android:textColor="#888888" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="请先开启无障碍服务，然后打开微信/QQ/钉钉聊天"
+                android:textSize="13sp"
+                android:textColor="#AAAAAA" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 设置按钮 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:tint="#FFFFFF"
+        app:backgroundTint="#2196F3"
+        app:fabSize="normal"
+        android:contentDescription="设置" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

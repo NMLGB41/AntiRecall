@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">消息保镖</string>
+
+    <!-- 无障碍服务描述 -->
+    <string name="accessibility_service_description">
+        消息保镖防撤回服务。\n\n通过监控微信、QQ、钉钉的聊天界面，捕获消息内容。当检测到有消息被撤回时，会保留原始内容并通知您。\n\n本服务不会收集、上传或分享任何聊天数据，所有消息仅保存在您的手机本地。
+    </string>
+</resources>
