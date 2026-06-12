@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dao: MessageDao
     private lateinit var adapter: MessageAdapter
 
-    /** 当前过滤: null=全部, 否则按包名过滤 */
-    private var currentFilter: String? = null
+    /** 当前过滤: null=全部, String=按包名/特殊值过滤, Set<String>=多包名过滤 */
+    private var currentFilter: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,16 +75,15 @@ class MainActivity : AppCompatActivity() {
     private fun loadMessages() {
         lifecycleScope.launch {
             try {
-                val messages = when (currentFilter) {
+                val messages = when (val filter = currentFilter) {
                     null -> dao.getMessagesPaged(200, 0)
-                    AppConstants.WECHAT_PKG -> dao.getMessagesByPackage(AppConstants.WECHAT_PKG)
-                        .let { dao.getMessagesPaged(200, 0).filter { it.packageName == AppConstants.WECHAT_PKG } }
-                    AppConstants.QQ_PKG -> dao.getMessagesPaged(200, 0)
-                        .filter { it.packageName == AppConstants.QQ_PKG }
-                    AppConstants.DINGTALK_PKG, AppConstants.DINGTALK_PKG_NEW ->
-                        dao.getMessagesPaged(200, 0)
-                            .filter { it.packageName in setOf(AppConstants.DINGTALK_PKG, AppConstants.DINGTALK_PKG_NEW) }
-                    "recalled" -> dao.getRecalledMessagesList()
+                    is String -> when (filter) {
+                        "recalled" -> dao.getRecalledMessagesList()
+                        AppConstants.WECHAT_PKG -> dao.getMessagesPaged(200, 0).filter { it.packageName == AppConstants.WECHAT_PKG }
+                        AppConstants.QQ_PKG -> dao.getMessagesPaged(200, 0).filter { it.packageName == AppConstants.QQ_PKG }
+                        else -> dao.getMessagesPaged(200, 0)
+                    }
+                    is Set<*> -> dao.getMessagesPaged(200, 0).filter { it.packageName in filter }
                     else -> dao.getMessagesPaged(200, 0)
                 }
 
@@ -120,13 +119,13 @@ class MainActivity : AppCompatActivity() {
             loadMessages()
         }
 
-        binding.chipQQ.setOnClickListener {
+        binding.chipQq.setOnClickListener {
             currentFilter = AppConstants.QQ_PKG
             loadMessages()
         }
 
         binding.chipDingtalk.setOnClickListener {
-            currentFilter = AppConstants.DINGTALK_PKG
+            currentFilter = setOf(AppConstants.DINGTALK_PKG, AppConstants.DINGTALK_PKG_NEW)
             loadMessages()
         }
 
